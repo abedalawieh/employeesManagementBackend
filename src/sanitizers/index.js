@@ -1,6 +1,6 @@
 import sanitize from "sanitize-html";
 const sanitizeObject = async (obj) => {
-  if (typeof object !== "object") {
+  if (typeof obj !== "object") {
     return false;
   }
   for (let key in obj) {
@@ -11,7 +11,7 @@ const sanitizeObject = async (obj) => {
     } else {
       obj[key] = await sanitizeString(obj[key]);
       if (key === "email") {
-        const check = _sys.validate.email(obj[key]);
+        const check = await _sys.validate.email(obj[key]);
         if (check === false) {
           throw new Error("Invalid Email");
         }
@@ -45,7 +45,7 @@ const sanitizeString = async (string) => {
   }
   let sanitizedString = String(sanitize(string));
   if (sanitizedString === "") {
-    throw new Error("Invalid sanitized value");
+    throw new Error("Invalid data type");
   }
   return sanitizedString;
 };
