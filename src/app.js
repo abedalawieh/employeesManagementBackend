@@ -1,11 +1,11 @@
 import express from "express";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import createHttpError from "http-errors";
+import connection from "./config/db/db.config.js";
 
 //Create Express App
 
@@ -39,5 +39,4 @@ app.use(async (err, req, res, next) => {
     },
   });
 });
-console.log(_sys.services.frontend.url);
 export default app;
