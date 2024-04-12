@@ -18,14 +18,23 @@ Employee.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      isEmail: {
+        msg: "Invalid email format",
+      },
     },
     jobTitle: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isIn: [["Engineer", "Salesman", "Accountant", "Seller"]],
+      },
     },
     department: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isIn: [["Engineering", "Sales", "Marketing", "Finance"]],
+      },
     },
     location: {
       type: DataTypes.STRING,

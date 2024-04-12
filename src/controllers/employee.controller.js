@@ -1,6 +1,13 @@
-import { createEmployees } from "../services/employee.service.js";
+import {
+  createEmployees,
+  deleteEmployee,
+  updateEmployee,
+} from "../services/employee.service.js";
 const requiredMessage = "All fields are required";
 const successCreatedMessage = "Employees Created Successfully";
+const successDeletedMessage = "Employee Deleted Successfully";
+const successUpdatedMessage = "Employee Updated Successfully";
+
 const invalidDepartmentMessage = "Invalid Department";
 const invalidJobTitleMessage = "Invalid Job Title";
 
@@ -43,6 +50,35 @@ export const createEmployeesOp = async (req, res, next) => {
     const result = await createEmployees(employees);
 
     return _sys.utils.response1.success(res, successCreatedMessage, result);
+  } catch (error) {
+    return _sys.utils.response1.clientError(res, error.message);
+  }
+};
+export const deleteEmployeeOp = async (req, res, next) => {
+  try {
+    if (!req.query.id) {
+      return _sys.utils.response1.clientError(res, requiredMessage);
+    }
+    const id = await _sys.sanitize.string(req.query.id);
+    await deleteEmployee(id);
+
+    return _sys.utils.response1.success(res, successDeletedMessage);
+  } catch (error) {
+    return _sys.utils.response1.clientError(res, error.message);
+  }
+};
+export const updateEmployeeOp = async (req, res, next) => {
+  try {
+    if (!req.query.id) {
+      return _sys.utils.response1.clientError(res, requiredMessage);
+    }
+    const id = await _sys.sanitize.string(req.query.id);
+    if (!req.body.data) {
+      return _sys.utils.response1.clientError(res, requiredMessage);
+    }
+    const data = await _sys.sanitize.object(req.body.data);
+    await updateEmployee(id, data);
+    return _sys.utils.response1.success(res, successUpdatedMessage);
   } catch (error) {
     return _sys.utils.response1.clientError(res, error.message);
   }
