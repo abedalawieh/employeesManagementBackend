@@ -7,9 +7,6 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import createHttpError from "http-errors";
 
-//DOTENV config
-dotenv.config();
-
 //Create Express App
 
 const app = express();
@@ -28,7 +25,7 @@ app.use(compression());
 //file upload
 app.use(fileUpload({ useTempFiles: true }));
 //cors
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: _sys.services.frontend.url }));
 //error handling
 app.use(async (req, res, next) => {
   next(createHttpError.NotFound("This route does not exist"));
@@ -42,4 +39,5 @@ app.use(async (err, req, res, next) => {
     },
   });
 });
+console.log(_sys.services.frontend.url);
 export default app;
