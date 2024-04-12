@@ -1,23 +1,23 @@
 import app from "./app.js";
-
+import logger from "./config/logger/logger.config.js";
 //env variables
 const PORT = process.env.PORT;
 
 let server = app.listen(PORT, () => {
-  console.log(`Server Listening on port ${PORT}`);
+  logger.info(`Server Listening on port ${PORT}`);
 });
 
 //handle server error
 const exitHandler = () => {
   if (server) {
-    console.log("server closed.");
+    logger.info("server closed.");
     process.exit(1);
   } else {
     process.exit(1);
   }
 };
 const unexpectedErrorHnadler = (error) => {
-  console.log(error);
+  logger.error(error);
   exitHandler();
 };
 process.on("uncaughtException", unexpectedErrorHnadler);
@@ -26,7 +26,7 @@ process.on("unhandledRejection", unexpectedErrorHnadler);
 //SIGTERM
 process.on("SIGTERM", () => {
   if (server) {
-    console.log("Server closed.");
+    logger.info("server closed.");
     process.exit(1);
   }
 });
