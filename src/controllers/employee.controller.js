@@ -11,7 +11,7 @@ export const createEmployeesOp = async (req, res, next) => {
   try {
     const errors = [];
 
-    req.body.employees.forEach((employee) => {
+    req.body.employees.forEach((employee, index) => {
       // Check for missing data
       if (
         !employee.name ||
@@ -20,17 +20,17 @@ export const createEmployeesOp = async (req, res, next) => {
         !employee.department ||
         !employee.jobTitle
       ) {
-        errors.push(requiredMessage);
+        errors.push(requiredMessage + ` for elemet at index ${index}`);
       }
 
       // Check for invalid department
       if (!departments.includes(employee.department)) {
-        errors.push(invalidDepartmentMessage);
+        errors.push(invalidDepartmentMessage + ` for elemet at index ${index}`);
       }
 
       // Check for invalid job title
       if (!jobTitles.includes(employee.jobTitle)) {
-        errors.push(invalidJobTitleMessage);
+        errors.push(invalidJobTitleMessage + ` for elemet at index ${index}`);
       }
     });
 
