@@ -27,6 +27,7 @@
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
+    "sanitize-html": "^2.13.0",
     "sequelize": "^6.37.2",
     "trim-request": "^1.0.6",
     "validator": "^13.11.0",
