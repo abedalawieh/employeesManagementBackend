@@ -6,6 +6,8 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import createHttpError from "http-errors";
 import connection from "./config/db/db.config.js";
+import Employee from "./models/employee.model.js";
+import Admin from "./models/admin.model.js";
 
 //Create Express App
 
@@ -25,7 +27,7 @@ app.use(compression());
 //file upload
 app.use(fileUpload({ useTempFiles: true }));
 //cors
-app.use(cors({ origin: _sys.services.frontend.url }));
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 //error handling
 app.use(async (req, res, next) => {
   next(createHttpError.NotFound("This route does not exist"));

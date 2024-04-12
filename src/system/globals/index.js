@@ -1,21 +1,17 @@
 import Responses from "../../utils/responses/index.js";
-import axios from "axios";
-import logger from "../../config/logger/logger.config.js";
 import dotenv from "dotenv";
+
 dotenv.config();
+
+import logger from "../../config/logger/logger.config.js";
+
 const response = new Responses();
 
 global._sys = {
-  services: {
-    frontend: {
-      url: process.env.FRONTEND_URL,
-    },
-
-    utils: {
-      response: response,
-      axios: axios,
-    },
+  utils: {
+    response: response,
   },
+
   logger: logger,
 };
 export default _sys;
