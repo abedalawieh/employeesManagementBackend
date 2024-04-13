@@ -3,7 +3,6 @@ import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
-import fileUpload from "express-fileupload";
 import connection from "./config/db/db.config.js";
 import Employee from "./models/employee.model.js";
 import Admin from "./models/admin.model.js";
@@ -23,8 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //gzip compression
 app.use(compression());
-//file upload
-app.use(fileUpload({ useTempFiles: true }));
+
 //cors
 app.use(cors({ origin: process.env.FRONTEND_URL }));
 //routes api v1
