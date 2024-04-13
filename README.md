@@ -45,3 +45,5 @@ EMPLOYEE_DEFAULT_PROFILE_PICTURE=https://encrypted-tbn0.gstatic.com/images?q=tbn
 # Secret key for JWT (JSON Web Tokens)
 
 SECRET_KEY=your_secret_key_for_jwt
+
+# After configuring the environment variables, run `npm run dev` to start the server in development mode
