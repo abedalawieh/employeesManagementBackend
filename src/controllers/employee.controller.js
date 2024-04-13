@@ -2,11 +2,15 @@ import {
   createEmployees,
   deleteEmployee,
   updateEmployee,
+  getEmployee,
+  getEmployees,
 } from "../services/employee.service.js";
 const requiredMessage = "All fields are required";
 const successCreatedMessage = "Employees Created Successfully";
 const successDeletedMessage = "Employee Deleted Successfully";
 const successUpdatedMessage = "Employee Updated Successfully";
+const successReadMessage = "Employee Successfully Found";
+const successReadAllMessage = "Employees Successfully Found";
 
 const invalidDepartmentMessage = "Invalid Department";
 const invalidJobTitleMessage = "Invalid Job Title";
@@ -79,6 +83,28 @@ export const updateEmployeeOp = async (req, res, next) => {
     const data = await _sys.sanitize.object(req.body.data);
     await updateEmployee(id, data);
     return _sys.utils.response1.success(res, successUpdatedMessage);
+  } catch (error) {
+    return _sys.utils.response1.clientError(res, error.message);
+  }
+};
+export const getEmployeeOp = async (req, res, next) => {
+  try {
+    if (!req.query.id) {
+      return _sys.utils.response1.clientError(res, requiredMessage);
+    }
+    const id = await _sys.sanitize.string(req.query.id);
+    const result = await getEmployee(id);
+
+    return _sys.utils.response1.success(res, successReadMessage, result);
+  } catch (error) {
+    return _sys.utils.response1.clientError(res, error.message);
+  }
+};
+export const getEmployeesOp = async (req, res, next) => {
+  try {
+    const result = await getEmployees();
+
+    return _sys.utils.response1.success(res, successReadAllMessage, result);
   } catch (error) {
     return _sys.utils.response1.clientError(res, error.message);
   }

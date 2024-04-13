@@ -27,3 +27,23 @@ export const updateEmployee = async (employeeId, data) => {
     throw new Error(error.message);
   }
 };
+export const getEmployee = async (employeeId) => {
+  try {
+    const result = await Employee.findByPk(employeeId);
+    if (result === null) {
+      throw new Error("No employee with this id");
+    }
+    return result;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+export const getEmployees = async () => {
+  try {
+    const employees = await Employee.findAll();
+
+    return employees;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
