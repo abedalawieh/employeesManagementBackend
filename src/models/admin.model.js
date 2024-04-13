@@ -1,5 +1,4 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-import bcrypt from "bcrypt";
 import connection from "../config/db/db.config.js";
 
 class Admin extends Model {
@@ -52,7 +51,7 @@ Admin.init(
     timestamps: true,
     hooks: {
       beforeCreate: async (admin) => {
-        const salt = await bcrypt.genSalt();
+        const salt = await _sys.bcrypt.genSalt();
         admin.password = await bcrypt.hash(admin.password, salt);
       },
     },

@@ -11,6 +11,8 @@ import {
   sanitizeArray,
   sanitizeObject,
 } from "../../sanitizers/index.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const response = new Responses();
 
@@ -28,5 +30,7 @@ global._sys = {
   },
   express: express,
   logger: logger,
+  jwt: jwt,
+  bcrypt: bcrypt,
 };
 export default _sys;
